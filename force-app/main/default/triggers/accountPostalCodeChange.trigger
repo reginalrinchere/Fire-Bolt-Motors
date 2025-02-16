@@ -1,7 +1,5 @@
-trigger accountPostalCodeChange on Account (before update) {
-    switch on Trigger.OperationType {
-        when BEFORE_UPDATE {
-            accountPostalCodeHandler.manageTerritoryOwners(Trigger.new, Trigger.oldMap);
-        }
-    } 
+trigger AccountPostalCodeChange on Account (before update) {
+    if (Trigger.isBefore && Trigger.isUpdate) {
+        AccountPostalCodeHandler.manageTerritoryOwners(Trigger.new, Trigger.oldMap);
+    }
 }
