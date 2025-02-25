@@ -1,4 +1,4 @@
-trigger ManageOwners on Territory__c (after insert, after update) {
+trigger TerritoryValidator on Territory__c (after insert, after update) {
     // Call the handler method for insert
     if (Trigger.isInsert) {
         TerritoryValidator.validateTerritoryOwners(Trigger.new);
