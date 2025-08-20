@@ -1,3 +1,5 @@
+---
+
 ## Scenario: Custom Sales Territory Management
 
 Firebolt Motors Inc. is experiencing exponential sales growth after releasing their hit Model F solar powered sports car.
@@ -65,26 +67,6 @@ Since Firebolt Motors Inc.’s sales team has tripled in size in the past year, 
 
 ### 8. Test Coverage
 - Achieve at least 90% Apex test coverage with positive and negative test cases.
-
----
-
-## How to Use
-
-- Deploy your solution to a free Salesforce Developer Org.
-- Use any combination of declarative tools and Apex code.
-- Ensure bulkification and proper handling of edge cases.
-- Run comprehensive tests before deployment.
-
----
-
-## Grading Criteria
-
-| Grade | Description                                                                                       |
-|-------|-------------------------------------------------------------------------------------------------|
-| A     | Best practices, covers edge cases, clean logic, good comments, fully functional                  |
-| B     | Working code, minor errors, some missing edge case handling, possibly complex                    |
-| C     | Partial requirements met, may not be bulkified, some errors                                     |
-| D     | Fundamental flaws or broken functionality                                                       |
 
 ---
 
