@@ -1,5 +1,3 @@
----
-
 ## Scenario: Custom Sales Territory Management
 
 Firebolt Motors Inc. is experiencing exponential sales growth after releasing their hit Model F solar powered sports car.
@@ -66,4 +64,22 @@ Since Firebolt Motors Inc.’s sales team has tripled in size in the past year, 
 - When a Territory Owner changes, update ownership for all related Accounts accordingly.
 
 ### 8. Test Coverage
-- Achieve at least 75% Apex test coverage with positive and negative test cases.
+- Achieve at least 90% Apex test coverage with positive and negative test cases.
+
+---
+
+## Skills Implemented
+
+- Apex Triggers and Classes  
+- SOQL and SOSL Queries  
+- Salesforce Custom Objects and Fields  
+- Lookup and Master-Detail Relationships  
+- Apex Test Classes and Code Coverage  
+- Salesforce Declarative Tools (Validation Rules, Process Builder, Flows)  
+- Bulkification and Governor Limits Best Practices  
+- Exception Handling and Error Messaging  
+- Use of Randomization Logic in Apex  
+- Field History Tracking  
+- Deployment to Salesforce Developer Org  
+
+---
