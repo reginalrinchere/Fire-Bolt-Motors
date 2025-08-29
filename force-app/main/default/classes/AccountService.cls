@@ -24,9 +24,6 @@ public with sharing class AccountService {
                 updatedPostalCodes.add(updatedAccount.BillingPostalCode);
             }
         }
-        if (updatedPostalCodes.isEmpty()) {
-            return;
-        }
         assignTerritoryOwner(updatedPostalCodes, newAccounts);
         createAssignmentHistoryRecord(updatedPostalCodes, newAccounts, oldAccounts);
     }
