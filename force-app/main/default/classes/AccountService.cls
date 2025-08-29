@@ -200,32 +200,36 @@ public with sharing class AccountService {
     // ========================================================================================================================
     // REASSIGN BASED ON TERRITORY CHANGE
     // ========================================================================================================================
-    public static void reassignTerritoryOwner(List<Territory__c> newTerr, Map<Id, Territory__c> oldTerritoryMap) {
-        List<String> changedZipCodes = new List<String>();
-        for (Territory__c terr : newTerr) {
-            if (oldTerritoryMap.containsKey(terr.Id)) {
-                Territory__c oldTerr = oldTerritoryMap.get(terr.Id);
-            if (oldTerr.Owner__c != terr.Owner__c) {
-                changedZipCodes.add(terr.Zip_Code__c);
-            }
+   public static void reassignTerritoryOwner(List<Territory__c> newTerritories, Map<Id, Territory__c> oldTerritoryMap) {
+        List<String> zipCodes = new List<String>();
+        Map<String, Id> terrOwnerMap = new Map<String, Id>();
+        for (Territory__c newTerritory : newTerritories) {
+            Territory__c oldTerritory = oldTerritoryMap.get(newTerritory.Id);
+            if (oldTerritory == null) continue;
+            if (oldTerritory.Owner__c != null && oldTerritory.Owner__c != newTerritory.Owner__c) {
+                zipCodes.add(newTerritory.Zip_Code__c);
+                terrOwnerMap.put(newTerritory.Zip_Code__c, newTerritory.Owner__c);
             }
         }
-        List<Account> affectedAccounts = [SELECT Id, OwnerId, BillingPostalCode FROM Account WHERE BillingPostalCode IN :changedZipCodes];
+        List<Account> affectedAccounts = [SELECT OwnerId, BillingPostalCode FROM Account WHERE BillingPostalCode IN :zipCodes];
         if (affectedAccounts.isEmpty()) {
             return;
         }
-        assignTerritoryOwner(changedZipCodes, affectedAccounts);
-        Map<Id, Account> oldAccounts = new Map<Id, Account>();
+        List<Account> updatedAccounts = new List<Account>();
         for (Account acc : affectedAccounts) {
-            oldAccounts.put(acc.Id, acc);
-        }
-        if (!affectedAccounts.isEmpty()) {
-            try {
-                update affectedAccounts;
-            } catch (DmlException e) {
-                system.debug('DML Exception: ' +e.getMessage());
+            if (acc.OwnerId != terrOwnerMap.get(acc.BillingPostalCode)) {
+                acc.OwnerId = terrOwnerMap.get(acc.BillingPostalCode);
+                updatedAccounts.add(acc);
             }
         }
-        createAssignmentHistoryRecord(changedZipCodes, affectedAccounts, oldAccounts);
+        if (updatedAccounts.isEmpty()) {
+            return;
+        }
+        try {
+            update updatedAccounts;
+        } catch (DmlException e) {
+            system.debug('DML Error: ' +e.getMessage());
+        }
+        assignTerritoryOwners(zipCodes, affectedAccounts);
     }
 }
