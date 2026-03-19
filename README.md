@@ -92,7 +92,7 @@ All logic supports bulk operations to adhere to Salesforce governor limits. The 
 
 Randomization Logic:
 
-Implemented Apex-based logic for randomly selecting a sales rep when multiple reps exist for a zip code, ensuring fairness in ownership assignment.
+Implemented Apex-based logic for randomly selecting a sales rep when multiple reps are assigned to a zip code, ensuring fairness in ownership assignment.
 
 Exception Handling:
 
@@ -174,5 +174,3 @@ Bulk Operations: Tests simulate large volumes of data to ensure the solution sca
 Edge Cases: Tests include scenarios where zip codes or territories are missing or invalid, ensuring the system behaves as expected in these cases.
 
 Random Ownership: Tests verify that the random assignment logic works when multiple reps are assigned to the same territory.
-
- 
