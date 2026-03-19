@@ -96,7 +96,7 @@ Implemented Apex-based logic for randomly selecting a sales rep when multiple re
 
 Exception Handling:
 
-Built-in logic gracefully handles unexpected conditions such as missing or invalid data. Any errors are logged and appropriate notifications are triggered to ensure transparency and easy debugging.
+Built-in logic gracefully handles unexpected conditions such as missing or invalid data. Any errors are logged, and appropriate notifications are triggered to ensure transparency and easy debugging.
 
 Test-Driven Development:
 
@@ -127,7 +127,7 @@ The AccountTrigger is kept lightweight and free from business logic. Instead of 
 
 Service Class (AccountService):
 
-The AccountService class contains all the business logic and is designed with single responsibility in mind. Each method in AccountService focuses on a specific task, ensuring that the code is highly modular and reusable.
+The AccountService class contains all the business logic and is designed with the single responsibility principle in mind. Each method in AccountService focuses on a specific task, ensuring that the code is highly modular and reusable.
 
 For example:
 
@@ -174,3 +174,5 @@ Bulk Operations: Tests simulate large volumes of data to ensure the solution sca
 Edge Cases: Tests include scenarios where zip codes or territories are missing or invalid, ensuring the system behaves as expected in these cases.
 
 Random Ownership: Tests verify that the random assignment logic works when multiple reps are assigned to the same territory.
+
+ 
