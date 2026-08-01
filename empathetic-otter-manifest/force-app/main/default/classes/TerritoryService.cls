@@ -32,17 +32,17 @@ public class TerritoryService {
                 territorOwnerMap.put(newTerritory.Zip_Code__c, newTerritory.Owner__c);
             }
         }
-        List<Account> accountsToUpdates = new List<Account>();
+        List<Account> accountsToUpdate = new List<Account>();
         List<Account> affectedAccounts = [SELECT Id, OwnerId, BillingPostalCode FROM Account WHERE BillingPostalCode IN :zipCodes];
         for(Account acc : affectedAccounts) {
             if(acc.OwnerId != territorOwnerMap.get(acc.BillingPostalCode)) {
                 acc.OwnerId = territorOwnerMap.get(acc.BillingPostalCode);
-                accountsToUpdates.add(acc);
+                accountsToUpdate.add(acc);
             }
         }
-        if(!accountsToUpdates.isEmpty()) {
-            update accountsToUpdates;
-            AccountService.assignTerritoryOwners(zipCodes, accountsToUpdates);
+        if(!accountsToUpdate.isEmpty()) {
+            update accountsToUpdate;
+            AccountService.assignTerritoryOwners(zipCodes, accountsToUpdate);
         }
     }
 }
