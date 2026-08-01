@@ -1,5 +1,5 @@
 public class OpportunityService2 {
-    public static void updateOpportunityOwnerS(Map<Id, Id> accountOwnerMap) {
+    public static void updateOpportunityOwners(Map<Id, Id> accountOwnerMap) {
         List<Opportunity> opportunityRecords = [SELECT Id, AccountId, OwnerId, StageName FROM Opportunity WHERE AccountId IN 
                                                 :accountOwnerMap.keySet() AND StageName NOT IN ('Closed Won','Closed Lost')];
         List<Opportunity> opportunitiesToUpdate = new List<Opportunity>();
