@@ -23,20 +23,20 @@ public class TerritoryService {
     }
     public static void reassignTerritoryOwners(List<Territory__c> newTerritories, Map<Id, Territory__c> oldTerritoryMap) {
         List<String> zipCodes =new List<String>();
-        Map<String, Id> territorOwnerMap = new Map<String, Id>();
+        Map<String, Id> territoryOwnerMap = new Map<String, Id>();
         for(Territory__c newTerritory : newTerritories) {
             Territory__c oldTerritory = oldTerritoryMap.get(newTerritory.Id);
             if(oldTerritory == null) continue;
             if(oldTerritory != null && oldTerritory.Owner__c != newTerritory.Owner__c) {
                 zipCodes.add(newTerritory.Zip_Code__c);
-                territorOwnerMap.put(newTerritory.Zip_Code__c, newTerritory.Owner__c);
+                territoryOwnerMap.put(newTerritory.Zip_Code__c, newTerritory.Owner__c);
             }
         }
         List<Account> accountsToUpdate = new List<Account>();
         List<Account> affectedAccounts = [SELECT Id, OwnerId, BillingPostalCode FROM Account WHERE BillingPostalCode IN :zipCodes];
         for(Account acc : affectedAccounts) {
-            if(acc.OwnerId != territorOwnerMap.get(acc.BillingPostalCode)) {
-                acc.OwnerId = territorOwnerMap.get(acc.BillingPostalCode);
+            if(acc.OwnerId != territoryOwnerMap.get(acc.BillingPostalCode)) {
+                acc.OwnerId = territoryOwnerMap.get(acc.BillingPostalCode);
                 accountsToUpdate.add(acc);
             }
         }
