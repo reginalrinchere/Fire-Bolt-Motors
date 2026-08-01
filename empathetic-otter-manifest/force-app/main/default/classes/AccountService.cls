@@ -42,7 +42,7 @@ public class AccountService {
         }
         if(!accountOwnerMap.isEmpty() && accountOwnerMap != null) {
             ContactService.updateContactOwners(accountOwnerMap);
-            OpportunityService2.updateOpportunityOwners(accountOwnerMap);
+            OpportunityService.updateOpportunityOwners(accountOwnerMap);
         }
     }
 }
